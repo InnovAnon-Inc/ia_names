@@ -110,7 +110,9 @@ function ia_names.get_connected_mobs()
     for _, obj in pairs(active_mobs) do
         -- Double check the object is still valid
         if obj:get_pos() then
-            table.insert(mobs, obj)
+            --table.insert(mobs, obj)
+            local player = fakelib.get_player_interface(obj)
+            table.insert(mobs, player)
         end
     end
     return mobs
@@ -130,7 +132,9 @@ end
 function ia_names.get_actor_by_name(name)
     local player = minetest.get_player_by_name(name)
     if player then return player end
-    return active_mobs[name]
+    --return active_mobs[name]
+    local obj    = active_mobs[name]
+    return fakelib.get_player_interface(obj)
 end
 
 -- Block real players from joining with reserved names
